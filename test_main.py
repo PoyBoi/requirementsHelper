@@ -27,7 +27,8 @@ def parse_requirements_file(file_path):
                 line = line.strip()
                 if line and not line.startswith('#'):
                     if '==' in line:
-                        name, version = line.split('==', 1)
+                        parts = [p.strip() for p in line.split('==', 1)]
+                        name, version = parts[0], parts[1]
                         requirements[name.lower()] = version
                     else:
                         requirements[line.lower()] = None
@@ -41,9 +42,9 @@ def show_difference(requirements, installed):
     updates = {}
     
     print("\nComparing requirements.txt with installed packages:")
-    print("-" * 60)
-    print(f"{'Package':<30} {'Required':<15} {'Installed':<15} {'Status'}")
-    print("-" * 60)
+    print("-" * 84)
+    print(f"{'Package':<40} {'Required':<15} {'Installed':<15} {'Status'}")
+    print("-" * 84)
     
     for package, req_version in requirements.items():
         if package in installed:
@@ -60,9 +61,9 @@ def show_difference(requirements, installed):
             else:
                 status = "Up to date"
                 
-            print(f"{package:<30} {req_version or 'Not specified':<15} {inst_version:<15} {status}")
+            print(f"{package:<40} {req_version or 'Not specified':<15} {inst_version:<15} {status}")
         else:
-            print(f"{package:<30} {req_version or 'Not specified':<15} {'Not installed':<15} {'Missing'}")
+            print(f"{package:<40} {req_version or 'Not specified':<15} {'Not installed':<15} {'Missing'}")
     
     return diff_found, updates
 
@@ -79,15 +80,17 @@ def update_requirements_file(file_path, _, updates):
                     continue
                 
                 if '==' in original:
-                    name = original.split('==', 1)[0].lower()
+                    parts = [p.strip() for p in original.split('==', 1)]
+                    name = parts[0].lower()
+                    
                     if name in updates:
-                        updated_lines.append(f"{name}=={updates[name]}")
+                        updated_lines.append(f"{parts[0]}=={updates[name]}")
                     else:
                         updated_lines.append(original)
                 else:
                     name = original.lower()
                     if name in updates:
-                        updated_lines.append(f"{name}=={updates[name]}")
+                        updated_lines.append(f"{original}=={updates[name]}")
                     else:
                         updated_lines.append(original)
         
