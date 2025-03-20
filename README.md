@@ -62,7 +62,7 @@ You will be prompted to enter a path to a `requirements.txt` file or a directory
 
 ## 🗃️ Example Output
 
-```mathematica
+```bash
 Enter the path to requirements.txt file or directory containing requirements.txt: </path/to/your/project>
 Using requirements file: /path/to/your/project/requirements.txt
 
@@ -80,9 +80,9 @@ llama-index-llms-llama-cpp               0.4.0          Not installed   Missing
 llama-index-llms-huggingface             0.4.2          0.4.2           Up to date
 ```
 
-In the output above:
-- Yellow indicates a package with a different version than required.
-- Red indicates a package that is missing or not installed.
+In the output above (_the following colors will show up in your command line, please imagine them here_):
+- `Yellow` indicates a package with a different version than required.
+- `Red` indicates a package that is missing or not installed.
 
 ## 🤓 Contributing
 
