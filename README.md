@@ -18,7 +18,7 @@
 ### Method 1: Via `.bat`:
 
 1. Download the file from [releases](https://github.com/PoyBoi/requirementsHelper/releases/download/v1.0.0/main.bat)
-2. Run the `main.bat`
+2. Run `main.bat`
 
 ### Method 2: Via `git clone`:
 
@@ -36,7 +36,7 @@
 
 ### Initialisation Method 1: Installed via `.bat`:
 
-1. Run the `main.bat` (if you haven't already)
+1. Run `main.bat` (if you haven't already)
 
 ### Initialisation Method 2: Installed via `git clone`:
 
