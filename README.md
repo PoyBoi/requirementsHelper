@@ -20,7 +20,7 @@
 1. Ensure you have [Python 3.8+](https://www.python.org/downloads/) installed.
 2. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/requirementsHelper.git
+   git clone https://github.com/PoyBoi/requirementsHelper
    ```
 3. Navigate to the project directory:
    ```bash
