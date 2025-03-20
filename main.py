@@ -41,9 +41,11 @@ def show_difference(reqs, installed):
                 diff = True
             else:
                 status = "Up to date"
-            print(f"{pkg:<40} {(req_ver or 'Not specified'):<15} {inst_ver:<15} {status}")
+            row = f"{pkg:<40} {(req_ver or 'Not specified'):<15} {inst_ver:<15} {status}"
         else:
-            print(f"{pkg:<40} {(req_ver or 'Not specified'):<15} {'Not installed':<15} {'Missing'}")
+            row = f"{pkg:<40} {(req_ver or 'Not specified'):<15} {'Not installed':<15} {'Missing'}"
+            diff = True
+        print(f"\033[93m{row}\033[0m" if "Different version" in row else (f"\033[91m{row}\033[0m" if "Up to date" not in row else row))
     return diff, updates
 
 def update_requirements_file(file_path, _, updates):
