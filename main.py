@@ -5,7 +5,6 @@ def activate_venv(directory):
     if sys.prefix != sys.base_prefix:
         return
     for d in ["venv", ".venv"]:
-        print(d)
         venv_path = os.path.join(directory, d)
         if os.path.isdir(venv_path):
             venv_python = os.path.join(venv_path, "Scripts", "python.exe") if os.name == "nt" else os.path.join(venv_path, "bin", "python")
