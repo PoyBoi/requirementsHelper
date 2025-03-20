@@ -1,6 +1,17 @@
 import os, sys, subprocess
 from pathlib import Path
 
+def activate_venv():
+    if sys.prefix != sys.base_prefix:
+        return
+    for d in ["venv", ".venv", "env", ".env"]:
+        if os.path.isdir(d):
+            venv_python = os.path.join(d, "Scripts", "python.exe") if os.name == "nt" else os.path.join(d, "bin", "python")
+            if os.path.isfile(venv_python) and os.path.realpath(venv_python) != os.path.realpath(sys.executable):
+                print("Activating virtual environment:", d)
+                os.execv(venv_python, [venv_python] + sys.argv)
+            break
+
 def get_installed_versions():
     try:
         result = subprocess.run([sys.executable, "-m", "pip", "freeze"],
@@ -43,9 +54,10 @@ def show_difference(reqs, installed):
                 status = "Up to date"
             row = f"{pkg:<40} {(req_ver or 'Not specified'):<15} {inst_ver:<15} {status}"
         else:
-            row = f"{pkg:<40} {(req_ver or 'Not specified'):<15} {'Not installed':<15} {'Missing'}"
+            status = "Missing"
+            row = f"{pkg:<40} {(req_ver or 'Not specified'):<15} {'Not installed':<15} {status}"
             diff = True
-        print(f"\033[93m{row}\033[0m" if "Different version" in row else (f"\033[91m{row}\033[0m" if "Up to date" not in row else row))
+        print(f"\033[93m{row}\033[0m" if status == "Different version" else (f"\033[91m{row}\033[0m" if status not in ["Up to date"] else row))
     return diff, updates
 
 def update_requirements_file(file_path, _, updates):
@@ -132,4 +144,5 @@ def main():
     return 0
 
 if __name__ == "__main__":
+    activate_venv()
     sys.exit(main())
