@@ -1,8 +1,8 @@
-# <div align="center"><b>📄 requirementsHelper 🐍</b></div>
+# <div align="center"><b>📃 requirementsHelper 🐍</b></div>
 
 </hr>
 
-## <div align="center"> Tool for updating your `requirements.txt` file to match the versions of the packages you currently have installed.</div>
+## <div align="center"> Tool for updating your `requirements.txt` to match the versions of the packages you currently have installed.</div>
 
 </hr>
 
@@ -10,12 +10,17 @@
 
 - **Version Comparison**: Compares package versions in your `requirements.txt` with the installed versions.
 - **Visual Feedback**: 
-  - Displays packages that are "Up to date" in the default color.
-  - Highlights packages with a "Different version" in yellow.
-  - Highlights missing or uninstalled packages in red.
+   - Packages that are up to date appear in the `default color`, packages with different versions are highlighted in `yellow`, and missing or uninstalled packages are shown in `red`.
 - **Automatic Update**: Optionally update your `requirements.txt` to reflect the installed package versions.
 
 ## ⬇️ Installation
+
+### Method 1: Via `.bat`:
+
+1. Download the file from [releases](https://github.com/PoyBoi/requirementsHelper/releases/download/v1.0.0/main.bat)
+2. Run the `main.bat`
+
+### Method 2: Via `git clone`:
 
 1. Ensure you have [Python 3.8+](https://www.python.org/downloads/) installed.
 2. Clone the repository:
@@ -29,18 +34,30 @@
 
 ## 🔧 Usage
 
-Run the script using Python:
+### Initialisation Method 1: Installed via `.bat`:
 
-```bash
-python requirementsHelper.py
-```
+1. Run the `main.bat` (if you haven't already)
+
+### Initialisation Method 2: Installed via `git clone`:
+
+1. Navigate to the project directory (if you haven't already):
+   ```bash
+   cd requirementsHelper
+   ```
+
+2. Run the script using Python:
+   ```bash
+   python requirementsHelper.py
+   ```
+
+### Main Usage:
 
 You will be prompted to enter a path to a `requirements.txt` file or a directory containing one or more requirements.txt files. The tool will then:
 - Compare the versions specified in the file with the versions installed in your environment.
 - Display the comparison in a formatted table with color-coded statuses.
 - Prompt you to update the requirements.txt file if discrepancies are found.
 
-### 🗃️ Example Output
+## 🗃️ Example Output
 
 ```mathematica
 Enter the path to requirements.txt file or directory containing requirements.txt: </path/to/your/project>
