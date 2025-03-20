@@ -1,12 +1,14 @@
 import os, sys, subprocess
 from pathlib import Path
 
-def activate_venv():
+def activate_venv(directory):
     if sys.prefix != sys.base_prefix:
         return
-    for d in ["venv", ".venv", "env", ".env"]:
-        if os.path.isdir(d):
-            venv_python = os.path.join(d, "Scripts", "python.exe") if os.name == "nt" else os.path.join(d, "bin", "python")
+    for d in ["venv", ".venv"]:
+        print(d)
+        venv_path = os.path.join(directory, d)
+        if os.path.isdir(venv_path):
+            venv_python = os.path.join(venv_path, "Scripts", "python.exe") if os.name == "nt" else os.path.join(venv_path, "bin", "python")
             if os.path.isfile(venv_python) and os.path.realpath(venv_python) != os.path.realpath(sys.executable):
                 print("Activating virtual environment:", d)
                 os.execv(venv_python, [venv_python] + sys.argv)
@@ -126,6 +128,7 @@ def main():
         print(f"Path not found: {path}")
         return 1
     print(f"Using requirements file: {req_file}")
+    activate_venv(os.path.dirname(req_file))
     installed = get_installed_versions()
     if not installed:
         print("Failed to get installed packages. Exiting.")
@@ -144,5 +147,4 @@ def main():
     return 0
 
 if __name__ == "__main__":
-    activate_venv()
     sys.exit(main())
